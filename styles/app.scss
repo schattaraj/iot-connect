@@ -1,0 +1,36 @@
+$primary:#FDF3FF;
+.layout-wrapper{
+    display: flex;
+    .left-side{
+        width: 260px;
+    }
+    .right-side{
+        width: calc(100% - 260px);
+        padding: 8px;
+    }
+    .header{
+        padding: 10px;
+        background-color: $primary;
+        border-radius: 16px;
+        display: flex;
+        justify-content: flex-end;
+        .user-action{
+            border-radius: 50%;
+            // padding: 12px;
+            border:none;
+            aspect-ratio: 2/2;
+            width: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background: linear-gradient(90deg, #4F6CFF 0%, #BB29F7 87.72%);
+            svg{
+                width: 18px;
+            }
+        }
+    }
+    .sidebar{
+        padding: 8px;
+    }
+}
