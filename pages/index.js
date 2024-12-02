@@ -1,6 +1,8 @@
 import Head from "next/head";
 import Image from "next/image";
 import localFont from "next/font/local";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 
 const geistSans = localFont({
@@ -15,6 +17,11 @@ const geistMono = localFont({
 });
 
 export default function Home() {
+  const router = useRouter()
+  useEffect(()=>{
+    console.log("router",router);
+    router.push("/Devices")
+  },[])
   return (
     <>
       {/* <Head>
@@ -23,7 +30,6 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head> */}
-      
     </>
   );
 }

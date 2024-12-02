@@ -1,5 +1,5 @@
-import Header from "./header";
-import Sidebar from "./sidebar";
+import Header from "./Header";
+import Sidebar from "./Sidebar";
 
 export default function Layout({ children }){
     return (
@@ -10,6 +10,7 @@ export default function Layout({ children }){
             </div>
             <div className="right-side">
             <Header/>
+            {children}
             </div>
         </div>
         </>
