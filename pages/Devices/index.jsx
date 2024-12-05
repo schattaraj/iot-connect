@@ -1,4 +1,5 @@
-import { Box, Button, Modal, TextField, Typography } from '@mui/material';
+import { Delete, Edit, MoreHoriz } from '@mui/icons-material';
+import { Box, Button, IconButton, Menu, MenuItem, Modal, TextField, Typography } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -7,8 +8,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { useEffect, useState } from 'react';
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
+function createData(name, authToken, deviceOwner, status, id) {
+  return { name, authToken, deviceOwner, status, id };
 }
 
 const rows = [
@@ -28,8 +29,16 @@ const style = {
 const paginationModel = { page: 0, pageSize: 5 };
 const Devices = () => {
   const [open, setOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const openMenu = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
   useEffect(()=>{
 console.log("Rows",Object(rows));
   },[])
@@ -62,10 +71,31 @@ console.log("Rows",Object(rows));
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell align="right">{row.authToken}</TableCell>
+              <TableCell align="right">{row.deviceOwner}</TableCell>
+              <TableCell align="right">{row.status}</TableCell>
+              <TableCell align="right">
+                <Button className='btn btn-primary'
+                id="basic-button"
+                aria-controls={openMenu ? 'basic-menu' : undefined}
+                aria-haspopup="true"
+                aria-expanded={openMenu ? 'true' : undefined}
+                onClick={handleClick}
+                ><MoreHoriz/>
+                </Button>
+              <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={openMenu}
+              onClose={handleCloseMenu}
+              MenuListProps={{
+                'aria-labelledby': 'basic-button',
+              }}
+              >
+        <MenuItem onClick={handleCloseMenu}><Edit className='me-2'/>Rename</MenuItem>
+        <MenuItem onClick={handleCloseMenu}><Delete className='me-2'/>Delete</MenuItem>
+              </Menu>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -100,7 +130,7 @@ console.log("Rows",Object(rows));
       fullWidth
       sx={{ mb: 2 }} // Margin bottom for spacing
     />
-    <Button
+    <button
       variant="contained"
       color="primary"
       onClick={()=>{}} // Replace with your submit handler
@@ -108,7 +138,7 @@ console.log("Rows",Object(rows));
       className='btn btn-primary'
     >
       Submit
-    </Button>
+    </button>
   </Box>
 </Modal>
 
